@@ -3,14 +3,17 @@ use rusty_cli::runner::Runner;
 
 mod command_list;
 mod commands;
+mod config;
 
 fn main() {
+
+    let config = config::parse_config();
 
     let commands = command_list::get_commands();
 
     let mut runner = Runner::new();
     runner.enable_command_handler(CommandHandlerArguments {
-        commands: commands,
+        commands,
         default_no_argument_callback: None,
         flags: vec![]
     });
