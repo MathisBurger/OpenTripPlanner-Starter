@@ -22,7 +22,7 @@ You will need:
 
 ## How to use it
 
-First you will have to download the [latest release](https://github.com/MathisBurger/OpenTripPlanner-Starter/releases/tag/0.1.0) from the releases tab.
+First you will have to download the [latest release](https://github.com/MathisBurger/OpenTripPlanner-Starter/releases/tag/0.1.1) from the releases tab.
 
 After that you can add it to your `/usr/local/bin` folder or leave it in the directory.
 If you decide to leave it in the directory you downloaded it into, you will be forced everytime to 
