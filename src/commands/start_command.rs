@@ -4,6 +4,7 @@ use rusty_cli::flags::flag::{Flag, Flags};
 use crate::commands::doctor::find_otp_version;
 use crate::config::{Config, parse_config};
 
+/// Command executor to start otp
 pub(crate) fn executor(flags: Flags) {
     let config = parse_config();
     let otp_version = find_otp_version();
@@ -11,6 +12,8 @@ pub(crate) fn executor(flags: Flags) {
         println!("OTP not found");
         return;
     }
+
+    // Command to start OTP
     Command::new("nohup")
         .args(vec![
             "java",
@@ -31,6 +34,9 @@ pub(crate) fn executor(flags: Flags) {
     println!("OTP started successfully")
 }
 
+/// Decides on the flags if the server should be started
+/// by using a generated graph file or if the
+/// graph should be generated on startup
 fn get_target_command(flags: &Flags) -> &'static str {
     if flags.get("buildOnStartup").is_some() {
         return "--build"
@@ -38,6 +44,7 @@ fn get_target_command(flags: &Flags) -> &'static str {
     return "--load";
 }
 
+/// Gets the target directory for the action
 fn get_target_dir(flags: Flags, config: Config) -> String{
     if flags.get("buildOnStartup").is_some() {
         return config.path.data_dir.clone();

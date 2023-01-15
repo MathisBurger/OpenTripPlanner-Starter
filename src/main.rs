@@ -6,6 +6,7 @@ mod commands;
 mod config;
 mod flag_list;
 
+/// Application entrypoint
 fn main() {
 
     // Initially parse config to check if it is valid

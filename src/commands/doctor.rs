@@ -4,6 +4,7 @@ use java_locator::locate_java_home;
 use std::{fs, env};
 use crate::config::parse_config;
 
+/// Command executor to check if all requirements are met
 pub(crate) fn executor(_flags: Flags) {
     println!("Running doctor test:");
     let java_version = get_java_version();
@@ -26,11 +27,14 @@ pub(crate) fn executor(_flags: Flags) {
     }
 }
 
+/// Gets the current java version and checks if java 17
+/// is used
 fn get_java_version() -> bool {
     let java_home = locate_java_home().unwrap();
     return java_home.contains("17");
 }
 
+/// Finds the current OTP version in the directory that the OTP should be started in
 pub(crate) fn find_otp_version() -> Option<String> {
     let current_dir = env::current_dir().unwrap();
     let supported_versions = vec!["otp-2.1.0-shaded.jar", "otp-2.2.0-shaded.jar"];

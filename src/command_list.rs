@@ -4,6 +4,8 @@ use crate::commands::doctor;
 use crate::commands::start_command;
 use crate::commands::stop_command;
 
+/// Gets all commands that can be executed by the CLI
+/// in a vector.
 pub(crate) fn get_commands() -> Vec<Command> {
 
     let build_graph = Command::new(
