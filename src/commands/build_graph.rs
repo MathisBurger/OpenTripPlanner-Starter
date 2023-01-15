@@ -1,3 +1,4 @@
+use std::fs;
 use std::io::{BufRead, BufReader};
 use std::process::{Command, Stdio};
 use rusty_cli::flags::flag::Flags;
@@ -24,5 +25,7 @@ pub(crate) fn executor(_flags: Flags) {
             println!("{}", line.unwrap());
         }
         cmd.wait().expect("Cannot build graph");
+        let _ = fs::create_dir("./graphs");
+        fs::rename("./data/graph.obj", "./graphs/graph.obj").expect("Cannot move graph file");
     }
 }
