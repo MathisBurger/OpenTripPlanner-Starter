@@ -1,0 +1,25 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+      - name: Setup rust
+        uses: ATiltedTree/setup-rust@v1
+        with:
+          rust-version: stable
+      - name: Build
+        run: cargo build --release
+      - name: upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: otp-starter
+          path: target/release/otp-starter
+
