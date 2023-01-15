@@ -17,9 +17,4 @@ jobs:
           rust-version: stable
       - name: Build
         run: cargo build --release
-      - name: upload artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: otp-starter
-          path: target/release/otp-starter
 

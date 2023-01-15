@@ -16,7 +16,8 @@ pub(crate) struct PathConfig {
 #[derive(Deserialize)]
 pub(crate) struct HttpConfig {
     pub(crate) port: u32,
-    pub(crate) secure_port: u32
+    pub(crate) secure_port: u32,
+    pub(crate) bind_address: String
 }
 
 /// Parses the config that has been supplied.

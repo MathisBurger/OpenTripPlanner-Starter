@@ -45,6 +45,8 @@ memory_limit = "10G"
 port = 8081
 # The HTTPS port that uses the application
 secure_port = 8083
+# The bind address that is required
+bind_address = "0.0.0.0"
 
 [path]
 # The relative/absolute path to the data directory
