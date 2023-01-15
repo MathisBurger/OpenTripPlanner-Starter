@@ -5,6 +5,7 @@ use std::str::FromStr;
 pub(crate) fn executor(_flags: Flags) {
 
     let output = Command::new("ps")
+        .arg("aux")
         .stdout(Stdio::piped())
         .output()
         .expect("Cannot run ps");
@@ -16,8 +17,13 @@ pub(crate) fn executor(_flags: Flags) {
             && process.contains("-jar otp-2.")
             && process.contains("-shaded.jar")
             && process.contains("--serve") {
-            let process_split = process.split(" ").collect::<Vec<&str>>();
-            let process_id = process_split.first().unwrap().to_string();
+            let mut process_split = process.split(" ").collect::<Vec<&str>>();
+            process_split.remove(0);
+            let mut i: usize = 0;
+            while process_split.get(i).unwrap().to_string() == "".to_string() {
+                i+=1;
+            }
+            let process_id = process_split.get(i).unwrap().to_string();
             Command::new("kill")
                 .arg(process_id)
                 .spawn()
