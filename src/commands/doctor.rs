@@ -2,6 +2,7 @@ use std::process::{Command, Stdio};
 use rusty_cli::flags::flag::Flags;
 use java_locator::locate_java_home;
 use std::{fs, env};
+use crate::config::parse_config;
 
 pub(crate) fn executor(_flags: Flags) {
     println!("Running doctor test:");
@@ -45,16 +46,10 @@ pub(crate) fn find_otp_version() -> Option<String> {
 }
 
 fn get_data_dir() -> bool {
-    let current_dir = env::current_dir().unwrap();
-    for entry in fs::read_dir(current_dir).unwrap() {
-        let entry = entry.unwrap();
-        let path = entry.path();
-        let metadata = fs::metadata(&path).unwrap();
-        let file_name = path.file_name().ok_or("None").unwrap().to_str().unwrap();
-        if metadata.is_dir() && file_name == "data" {
-             return true;
-        }
-
+    let config = parse_config();
+    let metadata = fs::metadata(config.path.graph_dir);
+    if metadata.is_err() {
+        return false;
     }
-    return false;
+    return metadata.unwrap().is_dir();
 }

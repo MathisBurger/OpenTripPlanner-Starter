@@ -3,19 +3,20 @@ use std::fs;
 
 #[derive(Deserialize)]
 pub(crate) struct Config {
-    http: HttpConfig,
-    path: PathConfig
+    pub(crate) http: HttpConfig,
+    pub(crate) path: PathConfig,
+    pub(crate) memory_limit: String
 }
 
 #[derive(Deserialize)]
 pub(crate) struct PathConfig {
-    data_dir: String,
-    graph_dir: String
+    pub(crate) data_dir: String,
+    pub(crate) graph_dir: String
 }
 #[derive(Deserialize)]
 pub(crate) struct HttpConfig {
-    port: u32,
-    secure_port: u32
+    pub(crate) port: u32,
+    pub(crate) secure_port: u32
 }
 
 pub(crate) fn parse_config() -> Config {

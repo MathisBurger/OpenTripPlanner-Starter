@@ -3,15 +3,24 @@ use std::io::{BufRead, BufReader};
 use std::process::{Command, Stdio};
 use rusty_cli::flags::flag::Flags;
 use crate::commands::doctor::find_otp_version;
+use crate::config::parse_config;
 
 pub(crate) fn executor(_flags: Flags) {
+    let config = parse_config();
     let otp_version = find_otp_version();
     if otp_version.is_none() {
         println!("OTP not found");
         return;
     }
     let mut cmd = Command::new("java")
-        .args(vec!["-Xmx10G", "-jar", otp_version.unwrap().as_str(), "--build", "--save", "./data"])
+        .args(vec![
+            format!("-Xmx{}", config.memory_limit).as_str(),
+            "-jar",
+            otp_version.unwrap().as_str(),
+            "--build",
+            "--save",
+            config.path.data_dir.as_str()
+        ])
         .stdout(Stdio::piped())
         .spawn()
         .expect("Cannot build graph");
@@ -25,7 +34,10 @@ pub(crate) fn executor(_flags: Flags) {
             println!("{}", line.unwrap());
         }
         cmd.wait().expect("Cannot build graph");
-        let _ = fs::create_dir("./graphs");
-        fs::rename("./data/graph.obj", "./graphs/graph.obj").expect("Cannot move graph file");
+        let _ = fs::create_dir(&config.path.graph_dir);
+        fs::rename(
+            format!("{}/graph.obj", config.path.data_dir),
+            format!("{}/graph.obj", config.path.graph_dir)
+        ).expect("Cannot move graph file");
     }
 }

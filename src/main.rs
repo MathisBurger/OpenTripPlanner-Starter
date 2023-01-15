@@ -7,7 +7,8 @@ mod config;
 
 fn main() {
 
-    let config = config::parse_config();
+    // Initially parse config to check if it is valid
+    config::parse_config();
 
     let commands = command_list::get_commands();
 
