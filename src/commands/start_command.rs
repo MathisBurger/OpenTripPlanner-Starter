@@ -9,8 +9,8 @@ pub(crate) fn executor(_flags: Flags) {
         return;
     }
     Command::new("nohup")
-        .args(vec!["java", "-Xmx10G", "-jar", otp_version.unwrap().as_str(), "--load", "--serve", "./graphs", "&"])
-        .output()
+        .args(vec!["java", "-Xmx10G", "-jar", otp_version.unwrap().as_str(), "--build", "--serve", "./data"])
+        .spawn()
         .expect("Cannot start server");
 
     println!("OTP started successfully")

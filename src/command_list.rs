@@ -2,6 +2,7 @@ use rusty_cli::commands::command::Command;
 use crate::commands::build_graph;
 use crate::commands::doctor;
 use crate::commands::start_command;
+use crate::commands::stop_command;
 
 pub(crate) fn get_commands() -> Vec<Command> {
 
@@ -29,5 +30,13 @@ pub(crate) fn get_commands() -> Vec<Command> {
         "start".to_string()
     );
 
-    return vec![build_graph, doctor];
+    let stop_command = Command::new(
+        "Stop".to_string(),
+        "Stops an otp instance".to_string(),
+        "Simple".to_string(),
+        stop_command::executor,
+        "stop".to_string()
+    );
+
+    return vec![build_graph, doctor, start_command, stop_command];
 }
