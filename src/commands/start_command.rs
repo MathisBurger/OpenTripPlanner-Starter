@@ -24,7 +24,7 @@ pub(crate) fn executor(flags: Flags) {
             "--securePort",
             format!("{}", config.http.secure_port).as_str(),
             "--bindAddress",
-            config.http.bind_address.as_str(),
+            format!("{}", config.http.bind_address).as_str(),
             get_target_command(&flags),
             "--serve",
             get_target_dir(flags, config).as_str()
