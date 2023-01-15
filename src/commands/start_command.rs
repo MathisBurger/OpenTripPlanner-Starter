@@ -1,6 +1,5 @@
-use std::fmt::format;
 use std::process::Command;
-use rusty_cli::flags::flag::{Flag, Flags};
+use rusty_cli::flags::flag::Flags;
 use crate::commands::doctor::find_otp_version;
 use crate::config::{Config, parse_config};
 

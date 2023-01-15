@@ -1,4 +1,3 @@
-use std::process::{Command, Stdio};
 use rusty_cli::flags::flag::Flags;
 use java_locator::locate_java_home;
 use std::{fs, env};

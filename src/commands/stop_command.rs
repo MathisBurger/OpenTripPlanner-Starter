@@ -1,6 +1,5 @@
 use std::process::{Command, Stdio};
 use rusty_cli::flags::flag::Flags;
-use std::str::FromStr;
 
 /// Command executor for the stop command
 pub(crate) fn executor(_flags: Flags) {
