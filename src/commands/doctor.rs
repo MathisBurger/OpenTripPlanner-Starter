@@ -35,17 +35,12 @@ fn get_java_version() -> bool {
 
 /// Finds the current OTP version in the directory that the OTP should be started in
 pub(crate) fn find_otp_version() -> Option<String> {
-    let current_dir = env::current_dir().unwrap();
-    let supported_versions = vec!["otp-2.1.0-shaded.jar", "otp-2.2.0-shaded.jar"];
-    for entry in fs::read_dir(current_dir).unwrap() {
-        let entry = entry.unwrap();
-        let path = entry.path();
-        let file_name = path.file_name().ok_or("None").unwrap().to_str().unwrap();
-        if supported_versions.contains(&file_name) {
-            return Some(file_name.parse().unwrap());
-        }
+    let config = parse_config();
+    let metadata = fs::metadata(config.otp_jar);
+    if metadata.is_err() {
+        return None;
     }
-    None
+    return Some(config.otp_jar);
 }
 
 fn get_data_dir() -> bool {

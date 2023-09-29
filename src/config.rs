@@ -5,7 +5,8 @@ use std::fs;
 pub(crate) struct Config {
     pub(crate) http: HttpConfig,
     pub(crate) path: PathConfig,
-    pub(crate) memory_limit: String
+    pub(crate) memory_limit: String,
+    pub(crate) otp_jar: String
 }
 
 #[derive(Deserialize)]
