@@ -1,6 +1,6 @@
 use rusty_cli::flags::flag::Flags;
 use java_locator::locate_java_home;
-use std::{fs, env};
+use std::{fs};
 use crate::config::parse_config;
 
 /// Command executor to check if all requirements are met
@@ -36,7 +36,7 @@ fn get_java_version() -> bool {
 /// Finds the current OTP version in the directory that the OTP should be started in
 pub(crate) fn find_otp_version() -> Option<String> {
     let config = parse_config();
-    let metadata = fs::metadata(config.otp_jar);
+    let metadata = fs::metadata(config.otp_jar.to_owned());
     if metadata.is_err() {
         return None;
     }
