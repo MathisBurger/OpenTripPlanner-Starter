@@ -31,7 +31,7 @@ provide the full path to the executable if you want to run it.
 After that go into the folder you want to use as your folder for the OTP installation
 
 This folder should contain:
-- A supported version of OTP [2.1.0, 2.2.0]
+- A version of OTP
 - A directory that contains all your data like GTFS files, etc.
 
 Now create a file named `otp-starter.toml` in this directory and use this configuration schema:
@@ -39,6 +39,7 @@ Now create a file named `otp-starter.toml` in this directory and use this config
 ```toml
 # The amount of memory that is assigned to the JVM that runs the OTP
 memory_limit = "10G"
+otp_jar = "./otp-2.4.0-shaded.jar"
 
 [http]
 # The HTTP port that uses the application
